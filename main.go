@@ -9,6 +9,7 @@ import (
 
 func main() {
 	router := gin.Default()
+	router.Static("/static", "./static")
 	router.HTMLRender = createHTMLRender()
 
 	router.GET("/", view.TopView)
@@ -18,6 +19,6 @@ func main() {
 
 func createHTMLRender() multitemplate.Renderer {
 	render := multitemplate.NewRenderer()
-	render.AddFromFiles("top", "templates/base.html", "templates/top.html")
+	render.AddFromFiles("top", "templates/base.html", "templates/top.html", "templates/navbar.html")
 	return render
 }
