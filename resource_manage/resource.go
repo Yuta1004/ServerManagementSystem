@@ -20,7 +20,11 @@ func (r Resource) Update() {
 	}
 
 	// 実行結果パース
-	vmstatInfo := vmstatParse(vmstatResult)
+	vmstatInfo, err := vmstatParse(vmstatResult)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
 	r.CPU.User = vmstatInfo["CPUUser"]
 	r.CPU.System = vmstatInfo["CPUSystem"]
 	r.CPU.Idol = vmstatInfo["CPUIdol"]

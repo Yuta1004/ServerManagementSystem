@@ -2,12 +2,25 @@ package resourcemanage
 
 import (
 	"fmt"
+	"runtime"
 	"strconv"
 	"strings"
 )
 
+// ErrorWrongOS : vmstatParseのエラー
+type ErrorWrongOS string
+
+func (e ErrorWrongOS) Error() string {
+	return fmt.Sprintf("[ERROR] OS must be Linux. %s", string(e))
+}
+
 // vmstatParse : vmstat実行結果から値を読みとる
-func vmstatParse(vmstatResult []byte) map[string]int {
+func vmstatParse(vmstatResult []byte) (map[string]int, error) {
+	// OSチェック
+	if runtime.GOOS != "linux" {
+		return make(map[string]int), ErrorWrongOS(runtime.GOOS)
+	}
+
 	// 読み取り準備
 	resultStr := string(vmstatResult)
 	infoArray := strings.Split(strings.Split(resultStr, "\n")[2], " ")
@@ -32,5 +45,5 @@ func vmstatParse(vmstatResult []byte) map[string]int {
 		}
 		keyIdx++
 	}
-	return vmstatInfo
+	return vmstatInfo, nil
 }
