@@ -33,12 +33,11 @@ func vmstatParse(vmstatResult []byte) (map[string]int, error) {
 	var err error
 	keyIdx := 0
 	vmstatInfo := make(map[string]int)
-	fmt.Println(infoArray)
+
 	for _, elem := range infoArray {
 		if elem == "" {
 			continue
 		}
-
 		vmstatInfo[keys[keyIdx]], err = strconv.Atoi(elem)
 		if err != nil {
 			fmt.Println(err.Error())
