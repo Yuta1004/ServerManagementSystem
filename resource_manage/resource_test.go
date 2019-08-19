@@ -10,3 +10,8 @@ func TestResourceInit(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestResourceUpdate(t *testing.T) {
+	r := ResourceInit()
+	r.Update()
+}
