@@ -16,16 +16,16 @@ func TestCrontabResultParse(t *testing.T) {
 	if len(result) != 4 {
 		t.Fail()
 	}
-	if result[0].Minute.wildcard {
+	if result[0].Minute.Wildcard {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(result[0].Minute.nums, []int{0}) {
+	if !reflect.DeepEqual(result[0].Minute.Nums, []int{0}) {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(result[0].Hour.nums, []int{0, 12}) {
+	if !reflect.DeepEqual(result[0].Hour.Nums, []int{0, 12}) {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(result[0].Day.nums, []int{0, 1, 2, 3, 4, 5, 6}) {
+	if !reflect.DeepEqual(result[0].Day.Nums, []int{0, 1, 2, 3, 4, 5, 6}) {
 		t.Fatal(result[0])
 	}
 }
