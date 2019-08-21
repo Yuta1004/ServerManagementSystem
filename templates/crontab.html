@@ -15,11 +15,11 @@
     <tbody>
     {{ range .crontabArray }}
         <tr>
-            <td>{{ .Month }}</td>
-            <td>{{ .DayOfMonth }}</td>
-            <td>{{ .Day }}</td>
-            <td>{{ .Hour }}</td>
-            <td>{{ .Minute }}</td>
+            <td>{{ .Month.RawData }}</td>
+            <td>{{ .DayOfMonth.RawData }}</td>
+            <td>{{ .Day.RawData }}</td>
+            <td>{{ .Hour.RawData }}</td>
+            <td>{{ .Minute.RawData }}</td>
             <td>{{ .Command }}</td>
     {{ end }}
     </tbody>
