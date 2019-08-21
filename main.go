@@ -8,12 +8,14 @@ import (
 )
 
 func main() {
+	baseURL := "/server-manage"
+
 	router := gin.Default()
-	router.Static("/static", "./static")
+	router.Static(baseURL+"/static", "./static")
 	router.HTMLRender = createHTMLRender()
 
-	router.GET("/", view.TopView)
-	router.GET("/crontab", view.CrontabView)
+	router.GET(baseURL+"/", view.TopView)
+	router.GET(baseURL+"/crontab", view.CrontabView)
 
 	router.Run(":19000")
 }
