@@ -5,6 +5,6 @@ import (
 )
 
 // LoginPageController : ログイン画面のコントローラー
-func LoginPageContoller(c *gin.Context) {
-
+func LoginPageController(c *gin.Context) {
+	c.HTML(200, "login", gin.H{})
 }
