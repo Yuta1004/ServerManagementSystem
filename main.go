@@ -1,7 +1,7 @@
 package main
 
 import (
-	"server-manage/view"
+	"server-manage/controller"
 
 	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
@@ -14,8 +14,8 @@ func main() {
 	router.Static(baseURL+"/static", "./static")
 	router.HTMLRender = createHTMLRender()
 
-	router.GET(baseURL+"/", view.TopView)
-	router.GET(baseURL+"/crontab", view.CrontabView)
+	router.GET(baseURL+"/", controller.TopPageController)
+	router.GET(baseURL+"/crontab", controller.CrontabPageController)
 
 	router.Run(":19000")
 }

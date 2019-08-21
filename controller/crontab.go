@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CrontabView : Crontabページのビューを設定する
-func CrontabView(c *gin.Context) {
+// CrontabPageController : Crontabページのコントローラー
+func CrontabPageController(c *gin.Context) {
 	c.HTML(200, "crontab", gin.H{
 		"crontabArray": crontabmanage.GetLatestCrontabData(),
 	})
