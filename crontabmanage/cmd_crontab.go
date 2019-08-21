@@ -9,10 +9,13 @@ import (
 func crontabResultParse(result []byte) []*Crontab {
 	resultStr := string(result)
 	resultArray := strings.Split(resultStr, "\n")
-	crontabInfoArray := make([]*Crontab, len(resultArray))
+	crontabInfoArray := make([]*Crontab, 0)
 
-	for idx, line := range resultArray {
+	for _, line := range resultArray {
 		crontabInfo := strings.Split(line, " ")
+		if len(crontabInfo) < 2 {
+			continue;
+		}
 		crontab := AllocCrontabStruct()
 		crontab.Minute = crontabDateParse(crontabInfo[0], 0, 59)
 		crontab.Hour = crontabDateParse(crontabInfo[1], 0, 23)
@@ -20,7 +23,7 @@ func crontabResultParse(result []byte) []*Crontab {
 		crontab.Month = crontabDateParse(crontabInfo[3], 1, 12)
 		crontab.Day = crontabDateParse(crontabInfo[4], 0, 6)
 		crontab.Command = crontabInfo[5]
-		crontabInfoArray[idx] = crontab
+		crontabInfoArray = append(crontabInfoArray, crontab)
 	}
 
 	return crontabInfoArray
