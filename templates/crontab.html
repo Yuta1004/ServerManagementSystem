@@ -1,0 +1,29 @@
+{{ define "content" }}
+<h1>Crontab</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">月</th>
+            <th scope="col">日</th>
+            <th score="col">曜日</th>
+            <th scope="col">時</th>
+            <th scope="col">分</th>
+            <th scope="col">コマンド</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{ range .crontabArray }}
+        <tr>
+            <td>{{ .Month }}</td>
+            <td>{{ .DayOfMonth }}</td>
+            <td>{{ .Day }}</td>
+            <td>{{ .Hour }}</td>
+            <td>{{ .Minute }}</td>
+            <td>{{ .Command }}</td>
+    {{ end }}
+    </tbody>
+</table>
+
+
+{{ end }}
