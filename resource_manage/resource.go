@@ -5,14 +5,14 @@ import (
 	"os/exec"
 )
 
-// ResourceInit : Resourceを初期化して返す
-func ResourceInit() Resource {
+// AllocResourceStruct : Resourceを初期化して返す
+func AllocResourceStruct() *Resource {
 	res := Resource{}
-	return res
+	return &res
 }
 
 // Update : リソース情報を最新のものに更新する
-func (r Resource) Update() {
+func (r *Resource) Update() {
 	// vmstat実行
 	vmstatResult, err := exec.Command("vmstat").Output()
 	if err != nil {
