@@ -22,7 +22,7 @@ func crontabResultParse(result []byte) []*Crontab {
 		crontab.DayOfMonth = crontabDateParse(crontabInfo[2], 1, 31)
 		crontab.Month = crontabDateParse(crontabInfo[3], 1, 12)
 		crontab.Day = crontabDateParse(crontabInfo[4], 0, 6)
-		crontab.Command = crontabInfo[5]
+		crontab.Command = crontabInfo[5:]
 		crontabInfoArray = append(crontabInfoArray, crontab)
 	}
 

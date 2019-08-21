@@ -8,7 +8,7 @@ type Crontab struct {
 	Hour       CrontabDateNum
 	Minute     CrontabDateNum
 	User       string
-	Command    string
+	Command    []string
 }
 
 // CrontabDateNum : Crontab表記に合わせた日時要素情報をもつ
