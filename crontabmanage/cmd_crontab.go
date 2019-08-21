@@ -52,7 +52,7 @@ func crontabDateParse(date string, lower, upper int) CrontabDateNum {
 		dateArray = append(dateArray, convertedI)
 	}
 
-	return CrontabDateNum{wildcardFlag, common.DeduplicationArrayInt(dateArray)}
+	return CrontabDateNum{wildcardFlag, common.DeduplicationArrayInt(dateArray), date}
 }
 
 func makeArrayWithInterval(lower, upper, interval int) []int {

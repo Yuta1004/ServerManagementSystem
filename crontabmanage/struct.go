@@ -13,6 +13,7 @@ type Crontab struct {
 
 // CrontabDateNum : Crontab表記に合わせた日時要素情報をもつ
 type CrontabDateNum struct {
-	wildcard bool
-	nums     []int
+	Wildcard bool
+	Nums     []int
+	RawData  string
 }
