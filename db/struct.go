@@ -4,6 +4,7 @@ package db
 type MySQLConnectInfo struct {
 	User		string
 	Host		string
+	Port 		int
 	DBName		string
 	Password	string
 }
