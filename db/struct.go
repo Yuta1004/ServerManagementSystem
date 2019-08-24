@@ -8,3 +8,9 @@ type MySQLConnectInfo struct {
 	DBName		string
 	Password	string
 }
+
+// UserInfo : DBに格納されているユーザ情報をもつ構造体
+type UserInfo struct {
+	ID				string
+	HashPassword 	string
+}
