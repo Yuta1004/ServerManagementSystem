@@ -21,5 +21,5 @@ func (m *MySQLConnectInfo) Update() {
 
 // GetConnectionInfo : MySQLに接続する際に必要な情報を返す
 func (m *MySQLConnectInfo) GetConnectionInfo() string {
-	return fmt.Sprintf("%s@%s/%s", m.User, m.Host, m.DBName)
+	return fmt.Sprintf("%s:@/%s", m.User, m.DBName)
 }
