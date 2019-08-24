@@ -17,9 +17,10 @@ func (m *MySQLConnectInfo) Update() {
 	m.User = os.Getenv("MYSQL_USER")
 	m.Host = os.Getenv("MYSQL_HOST")
 	m.DBName = os.Getenv("MYSQL_DB")
+	m.Password = os.Getenv("MYSQL_PASSWORD")
 }
 
 // GetConnectionInfo : MySQLに接続する際に必要な情報を返す
 func (m *MySQLConnectInfo) GetConnectionInfo() string {
-	return fmt.Sprintf("%s:@/%s", m.User, m.DBName)
+	return fmt.Sprintf("%s:%s@%s/%s", m.User, m.Password, m.Host, m.DBName)
 }
