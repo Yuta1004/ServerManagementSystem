@@ -1,0 +1,6 @@
+# user
+
+## column
+
+- id : varchar(80), primary key
+- password_hash : varchar(255)
