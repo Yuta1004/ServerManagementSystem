@@ -1,8 +1,9 @@
 GO = go
+ENV = ~/golang-project/src/server-manage/env.sh
 
 
 run:
-	@$(GO) run main.go
+	@source $(ENV); $(GO) run main.go
 
 test:
-	@$(GO) test -v ../server-manage/...
+	@source $(ENV); $(GO) test -v ../server-manage/...
