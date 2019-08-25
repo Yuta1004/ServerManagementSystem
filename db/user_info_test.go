@@ -16,4 +16,12 @@ func TestControllUserDB(t *testing.T) {
 	if len(userInfoList) != 1 {
 		t.Fail()
 	}
+	userInfoList = *GetUserDataFromDB("testuser")
+	if len(userInfoList) != 1 {
+		t.Fail()
+	}
+	userInfoList = *GetUserDataFromDB("sjklfjsdfalfjsladkfj")
+	if len(userInfoList) != 0 {
+		t.Fail()
+	}
 }

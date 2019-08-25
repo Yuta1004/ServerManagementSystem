@@ -3,8 +3,10 @@ package db
 import (
 	"fmt"
 	"log"
+	"strings"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"	/* => database/sqlで参照する */
+	"server-manage/common"
 )
 
 // InsertUserDataToDB : ユーザ情報をDBに追加する
@@ -46,7 +48,7 @@ func InsertUserDataToDB(userID, hashPassword string) (insertResult bool) {
 }
 
 // GetUserDataFromDB : DBからユーザ情報を引っ張ってくる
-func GetUserDataFromDB() *[]UserInfo {
+func GetUserDataFromDB(request ...string) *[]UserInfo {
 	userInfoList := make([]UserInfo, 0)
 
 	// DB接続
@@ -58,7 +60,8 @@ func GetUserDataFromDB() *[]UserInfo {
 	defer connect.Close()
 
 	// SQL実行
-	rows, err := connect.Query("select * from user")
+	sql := "select * from user where id " + makeSQLINOperator(request)
+	rows, err := connect.Query(sql, common.ConvToInterfaceSlice(request)...)
 	if err != nil {
 		log.Println(err.Error())
 		return &userInfoList
@@ -92,4 +95,11 @@ func getDBConnect() (*sql.DB, error) {
 		return nil, FaildToGetConnectionError(mysqlInfo.GetConnectionInfo())
 	}
 	return connect, nil
+}
+
+func makeSQLINOperator(keywords []string) string {
+	if len(keywords) == 0 {
+		return "LIKE \"%\""
+	}
+	return "in (?" + strings.Repeat(",?", len(keywords)-1) + ")"
 }
