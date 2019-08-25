@@ -1,6 +1,7 @@
 package db
 
 import (
+	"fmt"
 	"log"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"	/* => database/sqlで参照する */
@@ -11,8 +12,7 @@ func GetUserDataFromDB() *[]UserInfo {
 	userInfoList := make([]UserInfo, 0)
 
 	// DB接続
-	mysqlInfo := AllocMySQLConnectInfo()
-	connect, err := sql.Open("mysql", mysqlInfo.GetConnectionInfo())
+	connect, err := getDBConnect()
 	if err != nil {
 		log.Println(err.Error())
 		return &userInfoList
@@ -37,4 +37,21 @@ func GetUserDataFromDB() *[]UserInfo {
 		userInfoList = append(userInfoList, userInfo)
 	}
 	return &userInfoList
+}
+
+// FaildToGetConnectionError : getDBConnect() が返すエラー
+type FaildToGetConnectionError string
+
+func (f FaildToGetConnectionError) Error() string {
+	return fmt.Sprintf("[ERROR] Faild to get connect to db. (%s)", string(f))
+}
+
+func getDBConnect() (*sql.DB, error) {
+	// DB接続
+	mysqlInfo := AllocMySQLConnectInfo()
+	connect, err := sql.Open("mysql", mysqlInfo.GetConnectionInfo())
+	if err != nil {
+		return nil, FaildToGetConnectionError(mysqlInfo.GetConnectionInfo())
+	}
+	return connect, nil
 }
