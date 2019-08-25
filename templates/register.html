@@ -1,0 +1,28 @@
+{{ define "content" }}
+<div class="container">
+    <!--Title-->
+    <h1 class="text-center">Login</h1>
+    <br><br>
+
+    <!--Register Form-->
+    <form method="POST">
+        <!--UserID-->
+        <div class="form-group">
+            <label for="userid">UserID</label>
+            <input type="text" class="form-control" id="userid" placeholder="UserID"><br>
+        </div>
+        <!--Password-->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password"><br>
+        </div>
+        <!--Password(conf)-->
+        <div class="form-group">
+            <label for="password-conf">Password (Conf)</label>
+            <input type="password" class="form-control" id="password-conf" placeholder="Password(Conf)"><br>
+        </div>
+        <!--Submit Button-->
+        <button type="submit" class="btn btn-primary">login</button>
+    </form>
+</div>
+{{ end }}
