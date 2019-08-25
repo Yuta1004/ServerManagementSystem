@@ -1,13 +1,19 @@
 package db
 
 import (
+	"log"
 	"testing"
-	"server-manage/authfunc"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func TestControllUserDB(t *testing.T) {
-	hashPassword := authfunc.GenPasswordHash("servermanage")
-	result := InsertUserDataToDB("testuser", hashPassword)
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte("servermanage"), bcrypt.DefaultCost)
+	if err != nil {
+		log.Println("[ERROR] Faild to hash the password.")
+		return
+	}
+
+	result := InsertUserDataToDB("testuser", string(hashPassword))
 	if result {
 		t.Fail()	// すでにtestuserが挿入された状態でテストを行うこと!
 	}
