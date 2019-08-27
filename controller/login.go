@@ -6,5 +6,8 @@ import (
 
 // LoginPageController : ログイン画面のコントローラー
 func LoginPageController(c *gin.Context) {
-	c.HTML(200, "login", gin.H{})
+	errMsg := c.Query("error")
+	c.HTML(200, "login", gin.H{
+		"error": errMsg,
+	})
 }

@@ -4,6 +4,11 @@
     <h1 class="text-center">Login</h1>
     <br><br>
 
+    <!--Error-->
+    {{ if ne .error "" }}
+        <div class="alert alert-danger" role="alert">{{ .error }}</div><br>
+    {{ end }}
+
     <!--Login Form-->
     <form method="POST">
         <div class="form-group">
