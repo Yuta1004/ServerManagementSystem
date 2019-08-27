@@ -17,6 +17,7 @@ func main() {
 	router.GET(baseURL+"/", controller.TopPageController)
 	router.GET(baseURL+"/crontab", controller.CrontabPageController)
 	router.GET(baseURL+"/login", controller.LoginPageController)
+	router.POST(baseURL+"/login", controller.LoginPagePostController)
 
 	router.Run(":19000")
 }
