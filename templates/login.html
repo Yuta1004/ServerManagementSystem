@@ -6,7 +6,13 @@
 
     <!--Error-->
     {{ if ne .error "" }}
-        <div class="alert alert-danger" role="alert">{{ .error }}</div><br>
+        {{ if eq .error "InvalidInput" }}
+            <div class="alert alert-danger" role="alert">入力に不備があります</div><br>
+        {{ else if eq .error "WrongInput" }}
+            <div class="alert alert-danger" role="alert">入力に誤りがあります</div><br>
+        {{ else }}
+            <div class="alert alert-danger" role="alert">不明なエラーが発生しました</div><br>
+        {{ end }}
     {{ end }}
 
     <!--Login Form-->
