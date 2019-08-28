@@ -1,11 +1,15 @@
 package authfunc
 
 import (
+	"time"
+	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/sessions"
 	"server-manage/db"
+	"server-manage/common"
 )
 
 // Login : ログイン処理
-func Login(userID, password string) bool {
+func Login(c *gin.Context, userID, password string) bool {
 	// ユーザ存在チェック
 	fetchResult := db.GetUserDataFromDB(userID)
 	if len(*fetchResult) == 0 {
@@ -14,5 +18,16 @@ func Login(userID, password string) bool {
 
 	// パスワードチェック
 	dbPassword := (*fetchResult)[0].HashPassword
-	return AuthPassword(password, dbPassword)
+	checkResult := AuthPassword(password, dbPassword)
+
+	// セッション管理
+	if checkResult {
+		passphrase := common.GenPassphrase(30)
+		db.InsertSessionDataToDB(userID, passphrase, int(time.Now().Unix()+int64(3600)))
+		session := sessions.Default(c)
+		session.Set("UserID", userID)
+		session.Set("Passphrase", common.GenPassphrase(30))
+		session.Save()
+	}
+	return checkResult
 }

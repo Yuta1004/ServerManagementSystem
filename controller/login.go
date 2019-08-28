@@ -25,14 +25,13 @@ func LoginPagePostController(c *gin.Context) {
 	}
 
 	// ログイン処理
-	if authfunc.Login(userID, password) {
+	if authfunc.Login(c, userID, password) {
 		c.Redirect(302, "")
 	} else {
 		redirectWithError(c, "login", "WrongInput")
 	}
 	c.Next()
 }
-
 
 func redirectWithError(c *gin.Context, location, message string) {
 	encodedMessage := url.QueryEscape(message)

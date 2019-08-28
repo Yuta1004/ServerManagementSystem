@@ -50,7 +50,6 @@ func sessionCheck() gin.HandlerFunc{
 			c.Redirect(302, "../login")
 			c.Abort()
 		} else {
-			c.Set("UserID", userID)
 			c.Next()
 		}
 	}
