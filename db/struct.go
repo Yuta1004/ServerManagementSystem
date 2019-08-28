@@ -14,3 +14,10 @@ type UserInfo struct {
 	ID				string
 	HashPassword 	string
 }
+
+// SessionInfo : DBに格納されているセッション情報をもつ構造体
+type SessionInfo struct {
+	ID					string
+	Passphrase			string
+	ExpirationUnixTime	int
+}
