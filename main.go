@@ -28,6 +28,7 @@ func main() {
 	menu := router.Group(baseURL+"/manage")
 	menu.Use(sessionCheck())
 	{
+		menu.Static("/static", "./static")
 		menu.GET("/crontab", controller.CrontabPageController)
 	}
 
