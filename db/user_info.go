@@ -2,7 +2,6 @@ package db
 
 import (
 	"log"
-	"strings"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"	/* => database/sqlで参照する */
 	"server-manage/common"
@@ -31,7 +30,7 @@ func GetUserDataFromDB(request ...string) *[]UserInfo {
 	executable :=
 		func (conn *sql.DB) (interface{}) {
 			// SQL実行
-			sql := "select * from user where id " + makeSQLINOperator(request)
+			sql := "select * from user where id " + common.MakeSQLINOperator(request)
 			rows, err := conn.Query(sql, common.ConvToInterfaceSlice(request)...)
 			if err != nil {
 				log.Println(err.Error())
@@ -53,11 +52,4 @@ func GetUserDataFromDB(request ...string) *[]UserInfo {
 
 	result := ControlDB("GetUserData", executable)
 	return result.(*[]UserInfo)
-}
-
-func makeSQLINOperator(keywords []string) string {
-	if len(keywords) == 0 {
-		return "LIKE \"%\""
-	}
-	return "in (?" + strings.Repeat(",?", len(keywords)-1) + ")"
 }
