@@ -2,12 +2,13 @@ package main
 
 import (
 	"os"
-	"server-manage/controller"
+	"time"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-contrib/multitemplate"
-
+	"server-manage/controller"
+	"server-manage/db"
 )
 
 func main() {
@@ -45,12 +46,27 @@ func sessionCheck() gin.HandlerFunc{
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		userID := session.Get("UserID")
+		passphrase := session.Get("Passphrase")
 
 		if userID == nil {
 			c.Redirect(302, "../login")
 			c.Abort()
-		} else {
-			c.Next()
 		}
+
+		// 有効期限チェック
+		userIDStr := userID.(string)
+		sessionDBData := (*db.GetSessionDataFromDB(userIDStr))[0]
+		if time.Now().Unix() > int64(sessionDBData.ExpirationUnixTime) {
+			c.Redirect(302, "../login?error=OverExpirationDate")
+			c.Abort()
+		}
+
+		// パスフレーズチェック
+		passphraseStr := passphrase.(string)
+		if passphraseStr != sessionDBData.Passphrase {
+			c.Redirect(302, "../login?error=FraudSession")
+			c.Abort()
+		}
+		c.Next()
 	}
 }
