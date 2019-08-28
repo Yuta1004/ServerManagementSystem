@@ -8,5 +8,5 @@
 ## session
 
 - id : varchar(80), primary key, foreign key references column user(id)
-- keyword : varchar(30)
+- passphrase : varchar(30)
 - expiration_unix_time : int
