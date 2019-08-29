@@ -6,6 +6,7 @@ import (
 	"database/sql"
 )
 
+// InsertCommandDataToDB : コマンド情報をDBに挿入する
 func InsertCommandDataToDB(userID, name, command string) bool {
 	executable :=
 		func(tx *sql.Tx) {
@@ -22,6 +23,7 @@ func InsertCommandDataToDB(userID, name, command string) bool {
 	return result
 }
 
+// UpdateCommandDataDB : DBに格納されているコマンド情報を更新する
 func UpdateCommandDataOfDB(id int, userID string, request map[string]interface{}) bool {
 	// 更新するキー, 値を取り出す
 	reqKeySqls := make([]string, 0)
