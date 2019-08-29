@@ -51,3 +51,33 @@ func UpdateCommandDataOfDB(id int, userID string, request map[string]interface{}
 	result := ControlDBWithTransaction("UpdateCommandData", executable)
 	return result
 }
+
+// GetCommandDataFromDB : コマンド情報をDBから引っ張ってくる
+func GetCommandDataFromDB(userID string) *[]CommandInfo {
+	commandInfoList := make([]CommandInfo, 0)
+
+	executable :=
+	 	func (conn *sql.DB) interface{} {
+			// SQL実行
+			sql := "select * from command where user_id=?"
+			fetchResult, err := conn.Query(sql, userID)
+			if err != nil {
+				log.Println(err.Error())
+				return &commandInfoList
+			}
+
+			// データ取り出し
+			var tmp, useOk int
+			for fetchResult.Next() {
+				var commandInfo CommandInfo
+				fetchResult.Scan(&tmp, &commandInfo.UserID, &commandInfo.Name,
+								 &commandInfo.Command, &useOk)
+				commandInfo.useOK = useOk == 1
+				commandInfoList = append(commandInfoList, commandInfo)
+			}
+			return &commandInfoList
+		}
+
+	result := ControlDB("GetCommandData", executable)
+	return result.(*[]CommandInfo)
+}
