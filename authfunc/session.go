@@ -24,6 +24,11 @@ func CheckOKSession(c *gin.Context) (bool, string) {
 	userID := session.Get("UserID")
 	passphrase := session.Get("Passphrase")
 
+	// nilチェック
+	if userID == nil || passphrase == nil {
+		return false, "NoLogin"
+	}
+
 	// 有効期限チェック
 	userIDStr := userID.(string)
 	sessionDBData := (*db.GetSessionDataFromDB(userIDStr))[0]
