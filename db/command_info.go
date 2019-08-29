@@ -11,7 +11,7 @@ func InsertCommandDataToDB(userID, name, command string) bool {
 	executable :=
 		func(tx *sql.Tx) {
 			// SQL実行
-			sql := "insert into command values(?, ?, ?, 0)"
+			sql := "insert into command (user_id, name, command, use_ok) values(?, ?, ?, 0)"
 			_, err := tx.Exec(sql, userID, name, command)
 			if err != nil {
 				log.Println(err.Error())
