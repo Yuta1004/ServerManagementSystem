@@ -17,3 +17,25 @@ func InitSession(c *gin.Context, userID string) {
 	session.Set("Passphrase", passphrase)
 	session.Save()
 }
+
+// CheckOKSession : 有効なセッションかチェックして結果を返す
+func CheckOKSession(c *gin.Context) (bool, string) {
+	session := sessions.Default(c)
+	userID := session.Get("UserID")
+	passphrase := session.Get("Passphrase")
+
+	// 有効期限チェック
+	userIDStr := userID.(string)
+	sessionDBData := (*db.GetSessionDataFromDB(userIDStr))[0]
+	if time.Now().Unix() > int64(sessionDBData.ExpirationUnixTime) {
+		return false, "OverExpirationDate"
+	}
+
+	// パスフレーズチェック
+	passphraseStr := passphrase.(string)
+	if passphraseStr != sessionDBData.Passphrase {
+		return false, "FraudSession"
+	}
+
+	return true, "OK"
+}
