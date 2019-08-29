@@ -22,6 +22,7 @@ func LoginPagePostController(c *gin.Context) {
 	password := c.Request.Form["password"][0]
 	if userID == "" || password == "" {
 		redirectWithError(c, "login", "InvalidInput")
+		return
 	}
 
 	// ログイン処理
@@ -29,6 +30,7 @@ func LoginPagePostController(c *gin.Context) {
 		c.Redirect(302, "")
 	} else {
 		redirectWithError(c, "login", "WrongInput")
+		return
 	}
 	c.Next()
 }
