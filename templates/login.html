@@ -4,19 +4,31 @@
     <h1 class="text-center">Login</h1>
     <br><br>
 
+    <!--Error-->
+    {{ if ne .error "" }}
+        {{ if eq .error "InvalidInput" }}
+            <div class="alert alert-danger" role="alert">入力に不備があります</div><br>
+        {{ else if eq .error "WrongInput" }}
+            <div class="alert alert-danger" role="alert">入力に誤りがあります</div><br>
+        {{ else if eq .error "OverExpirationDate" }}
+            <div class="alert alert-warning" role="alert">セッションの有効期限が切れました<br>ログインし直してください</b></div>
+        {{ else if eq .error "FraudSession" }}
+            <div class="alert alert-danger" role="alert">不正なセッション</b></div>
+        {{ else }}
+            <div class="alert alert-danger" role="alert">不明なエラーが発生しました</div><br>
+        {{ end }}
+    {{ end }}
+
     <!--Login Form-->
     <form method="POST">
-        <!--UserID-->
         <div class="form-group">
             <label for="userid">UserID</label>
-            <input type="text" class="form-control" id="userid" placeholder="UserID"><br>
+            <input type="text" class="form-control" id="userid" name="userid" placeholder="UserID"><br>
         </div>
-        <!--Password-->
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password"><br>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password"><br>
         </div>
-        <!--Submit Button-->
         <button type="submit" class="btn btn-primary">login</button>
     </form>
 </div>
