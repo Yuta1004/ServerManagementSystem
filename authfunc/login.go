@@ -26,7 +26,7 @@ func Login(c *gin.Context, userID, password string) bool {
 		db.InsertSessionDataToDB(userID, passphrase, int(time.Now().Unix()+int64(3600)))
 		session := sessions.Default(c)
 		session.Set("UserID", userID)
-		session.Set("Passphrase", common.GenPassphrase(30))
+		session.Set("Passphrase", passphrase)
 		session.Save()
 	}
 	return checkResult
