@@ -9,3 +9,13 @@ create table session (
     expiration_unix_time int,
     foreign key (id) references user(id)
 );
+
+create table command (
+    id int auto_increment,
+    user_id varchar(80),
+    name varchar(80),
+    command varchar(255),
+    use_ok int,
+    foreign key (user_id) references user(id),
+    primary key (id, user_id)
+);
