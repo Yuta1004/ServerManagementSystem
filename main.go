@@ -25,7 +25,7 @@ func main() {
 	router.GET(baseURL+"/login", controller.LoginPageController)
 	router.POST(baseURL+"/login", controller.LoginPagePostController)
 	router.GET(baseURL+"/register", controller.RegisterPageController)
-	router.POST(baseURL+"register", controller.RegisterPagePostController)
+	router.POST(baseURL+"/register", controller.RegisterPagePostController)
 
 	menu := router.Group(baseURL+"/manage")
 	menu.Use(sessionCheck())

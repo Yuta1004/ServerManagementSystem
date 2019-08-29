@@ -4,25 +4,32 @@
     <h1 class="text-center">Register</h1>
     <br><br>
 
+    <!--Error-->
+    {{ if ne .error "" }}
+        {{ if eq .error "InvalidInput" }}
+            <div class="alert alert-danger" role="alert">入力に不備があります</div><br>
+        {{ else if eq .error "WrongInput" }}
+            <div class="alert alert-danger" role="alert">登録に失敗しました。<br>ユーザIDを変更するか、パスワードを入力し直してみてください。</div><br>
+        {{ else }}
+            <div class="alert alert-danger" role="alert">不明なエラーが発生しました</div><br>
+        {{ end }}
+    {{ end }}
+
     <!--Register Form-->
     <form method="POST">
-        <!--UserID-->
         <div class="form-group">
             <label for="userid">UserID</label>
-            <input type="text" class="form-control" id="userid" placeholder="UserID"><br>
+            <input type="text" class="form-control" id="userid" name="userid" placeholder="UserID"><br>
         </div>
-        <!--Password-->
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password"><br>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password"><br>
         </div>
-        <!--Password(conf)-->
         <div class="form-group">
             <label for="password-conf">Password (Conf)</label>
-            <input type="password" class="form-control" id="password-conf" placeholder="Password(Conf)"><br>
+            <input type="password" class="form-control" id="password-conf" name="password-conf" placeholder="Password(Conf)"><br>
         </div>
-        <!--Submit Button-->
-        <button type="submit" class="btn btn-primary">login</button>
+        <button type="submit" class="btn btn-primary">register</button>
     </form>
 </div>
 {{ end }}
