@@ -21,3 +21,12 @@ type SessionInfo struct {
 	Passphrase			string
 	ExpirationUnixTime	int
 }
+
+// CommandInfo : DBに格納されているコマンド情報をもつ構造体
+type CommandInfo struct {
+	ID		int
+	UserID	string
+	Name	string
+	Command	string
+	useOK	bool
+}
