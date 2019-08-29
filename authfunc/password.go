@@ -16,6 +16,6 @@ func GenPasswordHash(rawPassword string) string {
 
 // AuthPassword : パスワードとハッシュ化されたパスワードが合致するかを返す
 func AuthPassword(rawPassword, hashPassword string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(rawPassword), []byte(hashPassword))
-	return err != nil
+	err := bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(rawPassword))
+	return err == nil
 }
