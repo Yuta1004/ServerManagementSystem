@@ -52,6 +52,7 @@ func sessionCheck() gin.HandlerFunc{
 		if userID == nil {
 			c.Redirect(302, "../login")
 			c.Abort()
+            return
 		}
 
 		// 有効期限チェック
@@ -60,6 +61,7 @@ func sessionCheck() gin.HandlerFunc{
 		if time.Now().Unix() > int64(sessionDBData.ExpirationUnixTime) {
 			c.Redirect(302, "../login?error=OverExpirationDate")
 			c.Abort()
+            return
 		}
 
 		// パスフレーズチェック
@@ -67,6 +69,7 @@ func sessionCheck() gin.HandlerFunc{
 		if passphraseStr != sessionDBData.Passphrase {
 			c.Redirect(302, "../login?error=FraudSession")
 			c.Abort()
+            return
 		}
 		c.Next()
 	}
