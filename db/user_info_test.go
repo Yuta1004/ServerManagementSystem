@@ -18,11 +18,7 @@ func TestControllUserDB(t *testing.T) {
 		t.Fail()	// すでにtestuserが挿入された状態でテストを行うこと!
 	}
 
-	userInfoList := *GetUserDataFromDB()
-	if len(userInfoList) != 1 {
-		t.Fail()
-	}
-	userInfoList = *GetUserDataFromDB("testuser")
+	userInfoList := *GetUserDataFromDB("testuser")
 	if len(userInfoList) != 1 {
 		t.Fail()
 	}
