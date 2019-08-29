@@ -1,4 +1,4 @@
-package crontabmanage
+package crontab
 
 import (
 	"fmt"

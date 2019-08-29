@@ -1,4 +1,4 @@
-package crontabmanage
+package crontab
 
 // Crontab : Crontabの設定状況
 type Crontab struct {

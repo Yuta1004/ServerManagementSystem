@@ -1,4 +1,4 @@
-package resourcemanage
+package resource
 
 // Resource : サーバリソースを扱う
 type Resource struct {
