@@ -10,6 +10,7 @@ import (
 func LoginPageController(c *gin.Context) {
 	errMsg := c.Query("error")
 	c.HTML(200, "login", gin.H{
+		"pageTitle": "SMS-Login",
 		"error": errMsg,
 	})
 }

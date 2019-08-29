@@ -10,10 +10,12 @@
             <div class="alert alert-danger" role="alert">入力に不備があります</div><br>
         {{ else if eq .error "WrongInput" }}
             <div class="alert alert-danger" role="alert">入力に誤りがあります</div><br>
-        {{ else if eq .error "OverExpirationDate" }}
-            <div class="alert alert-warning" role="alert">セッションの有効期限が切れました<br>ログインし直してください</b></div>
         {{ else if eq .error "FraudSession" }}
             <div class="alert alert-danger" role="alert">不正なセッション</b></div>
+        {{ else if eq .error "OverExpirationDate" }}
+            <div class="alert alert-warning" role="alert">セッションの有効期限が切れました<br>ログインし直してください</b></div>
+        {{ else if eq .error "NoLogin" }}
+            <div class="alert alert-warning" role="alert">ログインが必要です</div>
         {{ else }}
             <div class="alert alert-danger" role="alert">不明なエラーが発生しました</div><br>
         {{ end }}

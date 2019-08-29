@@ -2,6 +2,7 @@ package crontabmanage
 
 import (
 	"fmt"
+	"strings"
 	"os/exec"
 )
 
@@ -19,4 +20,9 @@ func GetLatestCrontabData() []*Crontab {
 	}
 
 	return crontabResultParse(result)
+}
+
+// GetCommandStr : Crontab構造体のCommandを文字列にして返す
+func (c *Crontab) GetCommandStr() string {
+	return strings.Join(c.Command, " ")
 }

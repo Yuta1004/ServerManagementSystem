@@ -1,4 +1,84 @@
 {{ define "content" }}
 <h1>Server Management System</h1>
-top
+<br><br>
+
+<!-- No login alert -->
+{{ if eq .nowLogin false }}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">注意</h4>
+    <p>あなたは現在未ログイン状態です。</p>
+    <p>システムの利用にはログインが必須となっています。</p>
+    <p>下のリンクよりログインページを開き、ログインしてください。</p>
+    <p>パスワードが分からない場合は管理者に連絡してください。</p>
+    <hr>
+    <p class="mb-0"><a class="nav-link" href="/server-manage/login">ログインページ</a></p>
+</div>
+<br><br>
+{{ end }}
+
+<div class="row justify-content-around">
+    <!--Resource-->
+    <div class="col-3">
+        <div class="card">
+            <img class="card-img-top" src="/server-manage/static/clock.png" alt="カードの画像">
+            <div class="card-body">
+                <h5 class="card-title">Resource</h5>
+                <p class="card-text">cpu使用状況やメモリ状況を確認することができます。</p>
+                <a class="btn btn-primary" href="/server-manage/manage/crontab">Go</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Resource-->
+    <div class="col-3">
+        <div class="card">
+            <img class="card-img-top" src="/server-manage/static/clock.png" alt="カードの画像">
+            <div class="card-body">
+                <h5 class="card-title">Resource</h5>
+                <p class="card-text">cpu使用状況やメモリ状況を確認することができます。</p>
+                <a class="btn btn-primary" href="/server-manage/manage/crontab">Go</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Resource-->
+    <div class="col-3">
+        <div class="card">
+            <img class="card-img-top" src="/server-manage/static/clock.png" alt="カードの画像">
+            <div class="card-body">
+                <h5 class="card-title">Resource</h5>
+                <p class="card-text">cpu使用状況やメモリ状況を確認することができます。</p>
+                <a class="btn btn-primary" href="/server-manage/manage/crontab">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<div class="row justify-content-around">
+    <!--Resource-->
+    <div class="col-3">
+        <div class="card">
+            <img class="card-img-top" src="/server-manage/static/clock.png" alt="カードの画像">
+            <div class="card-body">
+                <h5 class="card-title">Resource</h5>
+                <p class="card-text">cpu使用状況やメモリ状況を確認することができます。</p>
+                <a class="btn btn-primary" href="/server-manage/manage/crontab">Go</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Resource-->
+    <div class="col-3">
+        <div class="card">
+            <img class="card-img-top" src="/server-manage/static/clock.png" alt="カードの画像">
+            <div class="card-body">
+                <h5 class="card-title">Resource</h5>
+                <p class="card-text">cpu使用状況やメモリ状況を確認することができます。</p>
+                <a class="btn btn-primary" href="/server-manage/manage/crontab">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
 {{ end }}
