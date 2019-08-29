@@ -9,6 +9,7 @@ import (
 func RegisterPageController(c *gin.Context) {
 	errorMsg := c.Query("error")
 	c.HTML(200, "register", gin.H{
+		"pageTitle": "SMS-Register",
 		"error": errorMsg,
 	})
 }

@@ -11,6 +11,7 @@ func LogoutPageController(c *gin.Context) {
 	loginNow := session.Get("UserID") != nil
 	authfunc.Logout(c)
 	c.HTML(200, "logout", gin.H{
+		"pageTitle": "SMS-Logout",
 		"loginNow": loginNow,
 	})
 }
