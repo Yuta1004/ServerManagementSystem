@@ -26,6 +26,7 @@ func main() {
 	router.POST(baseURL+"/login", controller.LoginPagePostController)
 	router.GET(baseURL+"/register", controller.RegisterPageController)
 	router.POST(baseURL+"/register", controller.RegisterPagePostController)
+	router.GET(baseURL+"/logout", controller.LogoutPageController)
 
 	menu := router.Group(baseURL+"/manage")
 	menu.Use(sessionCheck())
@@ -43,6 +44,7 @@ func createHTMLRender() multitemplate.Renderer {
 	render.AddFromFiles("crontab", "templates/base.html", "templates/crontab.html", "templates/navbar.html")
 	render.AddFromFiles("login", "templates/base.html", "templates/login.html", "templates/navbar.html")
 	render.AddFromFiles("register", "templates/base.html", "templates/register.html", "templates/navbar.html")
+	render.AddFromFiles("logout", "templates/base.html", "templates/logout.html", "templates/navbar.html")
 	return render
 }
 
